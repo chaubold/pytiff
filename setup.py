@@ -15,6 +15,7 @@ except:
     raise Exception("Numpy is needed for installation")
 
 import sys
+import os
 import pytiff._version as _version
 
 ext = ".pyx" if use_cython else ".cpp"
@@ -22,7 +23,7 @@ ext = ".pyx" if use_cython else ".cpp"
 extensions = [
     Extension("pytiff._pytiff", ["pytiff/_pytiff.pyx"],
     libraries=["tiff"],
-    include_dirs=["./pytiff", numpy.get_include()],
+    include_dirs=["./pytiff", numpy.get_include(), os.path.join(sys.prefix, 'include')],
     language="c++",
     )]
 
